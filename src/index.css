@@ -1,0 +1,26 @@
+@import "flowbite/src/themes/default";
+
+@plugin "daisyui";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+    .snap-x {
+        scroll-snap-type: x mandatory;
+    }
+
+    .snap-start {
+        scroll-snap-align: start;
+    }
+}
+
+/* Hide button on scroll down */
+.scroll-hide {
+    transform: translateY(100%);
+  }
+  
+  /* Show button on scroll up */
+  .scroll-show {
+    transform: translateY(0);
+  }
