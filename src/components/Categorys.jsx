@@ -1,16 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import iconBg from "../assets/Images/banner/Bg-Icons.png";
-import { ChevronLeft, ChevronRight } from "react-feather"; // Import icons
+import { ChevronLeft, ChevronRight } from "react-feather";
 
 const Categorys = () => {
   const { categorys = [] } = useSelector((state) => state.home);
-  // const { categorys = [] } = useSelector((state) => state.home);
   const navigate = useNavigate();
   const carouselRef = useRef(null);
   const [isHovered, setIsHovered] = useState(false);
-  const [showArrows, setShowArrows] = useState(true);
 
   const handleCategoryClick = (category) => {
     navigate(`/products?category=${category.name}`);
@@ -35,7 +32,7 @@ const Categorys = () => {
           const maxScrollLeft = carousel.scrollWidth - carousel.clientWidth;
           const itemWidth = carousel.firstChild?.offsetWidth || 0;
 
-          if (carousel.scrollLeft >= maxScrollLeft) {
+          if (carousel.scrollLeft >= maxScrollLeft - 10) {
             carousel.scrollTo({ left: 0, behavior: "smooth" });
           } else {
             carousel.scrollBy({
@@ -52,10 +49,10 @@ const Categorys = () => {
   }, [isHovered]);
 
   return (
-    <div className="mb-4">
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100">
-        {/* Header Section */}
-        <div className="flex items-center bg-none lg:bg-gray-900 rounded-t-lg justify-between px-2 py-2 lg:px-4 lg:py-4 border-gray-200">
+    <div className="mb-1">
+      <div className="bg-white rounded-lg mt-3 lg:mt-0 shadow-sm border border-gray-100 overflow-hidden">
+        {/* Header Section - Maintained your original structure */}
+        <div className="flex items-center bg-none lg:bg-gray-900 rounded-t-lg justify-between px-2 py-2 lg:px-4 lg:py-4">
           <div className="flex items-center space-x-4">
             <h2 className="text-lg lg:text-2xl font-semibold lg:font-bold text-orange-500 lg:text-white">
               Shop by Category
@@ -66,19 +63,21 @@ const Categorys = () => {
             <button 
               onClick={() => scroll('left')}
               className="p-2 rounded-full bg-white shadow-md hover:shadow-lg transition-shadow"
+              aria-label="Scroll left"
             >
               <ChevronLeft size={24} className="text-orange-600" />
             </button>
             <button 
               onClick={() => scroll('right')}
               className="p-2 rounded-full bg-white shadow-md hover:shadow-lg transition-shadow"
+              aria-label="Scroll right"
             >
               <ChevronRight size={24} className="text-orange-600" />
             </button>
           </div>
         </div>
 
-        {/* Category Carousel */}
+        {/* Category Carousel - Enhanced but structure preserved */}
         <div
           className="relative group"
           onMouseEnter={() => setIsHovered(true)}
@@ -87,51 +86,59 @@ const Categorys = () => {
           <div
             ref={carouselRef}
             className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth 
-            pb-0 lg:pb-4 scrollbar-thin scrollbar-thumb-orange-600 scrollbar-track-gray-100"
+            pb-0 lg:pb-4 px-2 scrollbar-thin scrollbar-thumb-orange-600 scrollbar-track-gray-100"
             role="list"
           >
             {categorys.length > 0 ? (
               categorys.map((category) => (
-                <article
+                <div
                   key={category.id}
-                  className="snap-start min-w-[105px] md:min-w-[180px] lg:min-w-[200px]
-                  flex flex-col items-center transition-all duration-300
+                  className="snap-start min-w-[105px] md:min-w-[180px] pb-4 lg:pb-0 lg:min-w-[200px]
+                  flex flex-col items-center px-1 transition-all duration-300
                   rounded-full active:scale-95 cursor-pointer"
                   onClick={() => handleCategoryClick(category)}
                   role="listitem"
                 >
-                  <div className="relative w-full aspect-square rounded-full bg-white p-5 lg:p-6 transition-shadow">
+                  {/* Enhanced category card */}
+                  <div className="relative w-full aspect-square rounded-full bg-white p-3 lg:p-5 transition-all">
                     <img
                       src={category.image}
                       alt={category.name}
                       loading="lazy"
-                      className="w-full h-full object-contain rounded-full lg:rounded-2xl hover:scale-110 transition-transform"
+                      className="w-full h-full shadow-sm rounded-full lg:rounded-3xl object-contain hover:scale-110 transition-transform duration-300"
                     />
                   </div>
-                  <h3 className="text-sm md:text-base font-base text-gray-600 text-center">
+                  <h3 className="mt-2 text-sm md:text-base font-medium text-gray-600 text-center">
                     {category.name}
                   </h3>
                   {category.count && (
-                    <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
+                    <span className="mt-1 text-xs text-orange-600 bg-orange-50 px-2 py-1 rounded-full">
                       {category.count} items
                     </span>
                   )}
-                </article>
+                </div>
               ))
             ) : (
               [...Array(6)].map((_, i) => (
                 <div
                   key={i}
-                  className="snap-start min-w-[160px] md:min-w-[180px] lg:min-w-[200px]
+                  className="snap-start min-w-[105px] md:min-w-[180px] lg:min-w-[200px]
                   flex flex-col items-center p-3 space-y-3 animate-pulse"
                 >
-                  <div className="w-full aspect-square bg-gray-200 rounded-xl" />
+                  <div className="w-full aspect-square bg-gray-200 rounded-full" />
                   <div className="h-4 w-3/4 bg-gray-200 rounded" />
                   <div className="h-4 w-1/2 bg-gray-200 rounded" />
                 </div>
               ))
             )}
-          </div>          
+          </div>
+
+          {/* Mobile scroll indicators (hidden on desktop) */}
+          <div className="lg:hidden flex justify-center space-x-2 mt-2 pb-2">
+            {categorys.slice(0, 4).map((_, i) => (
+              <span key={i} className="w-2 h-2 rounded-full bg-gray-300"></span>
+            ))}
+          </div>
         </div>
       </div>
     </div>

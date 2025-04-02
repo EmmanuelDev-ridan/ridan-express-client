@@ -20,6 +20,7 @@
     "date-fns": "^4.1.0",
     "flowbite": "^3.1.2",
     "flowbite-react": "^0.10.2",
+    "framer-motion": "^12.6.2",
     "html-react-parser": "^5.2.2",
     "html-to-text": "^9.0.5",
     "jodit-react": "^5.0.10",

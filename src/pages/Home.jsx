@@ -29,7 +29,7 @@ const Home = () => {
                 <div className='max-w-[1440px] mx-auto px-1 sm:px-5 lg:px-5 md:px-10'>
                     <Banner />
                 </div>
-                <div className='my-2 lg:my-4 max-w-[1440px] mx-auto px-1 sm:px-5 lg:px-[5rem] md:px-10'>
+                <div className=' max-w-[1440px] mx-auto px-2 sm:px-5 lg:px-[5rem] md:px-10'>
                     <Categorys />
                 </div>
                 <div className='px-0 mb-[1rem] md:px-[33px] lg:px-[75px]'>

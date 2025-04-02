@@ -55,18 +55,16 @@ const FeatureProducts = ({ products }) => {
     }
 
     return (
-        <div className='w-full max-w-7xl mx-auto py-0 lg:py-4 px-2 lg:px-4'>
+        <div className='w-full max-w-7xl mx-auto py-0 lg:py-2 px-1'>
 
-            <div className="flex border border-gray-200 bg-transparent lg:bg-gradient-to-r from-orange-500 to-orange-600 px-4 py-3 rounded-lg justify-between items-center mb-3 lg:mb-8 shadow-sm">
-                <div>
-                    <h2 className="text-xl lg:text-2xl font-bold text-orange-500 lg:text-white ">
-                        Special For You
-                    </h2>
-                    <span className="w-12 h-1 bg-orange-500 lg:bg-white mt-2 rounded-full block" />
-                </div>
+            <div className="flex border border-gray-200 bg-transparent lg:bg-orange-600 px-2 py-2 rounded-lg justify-between items-center mb-2 lg:mb-6">
+                <h2 className="text-xl font-bold text-orange-500 lg:text-white ">
+                    Special For You
+                    <span className="hidden lg:block w-12 h-1.5 block lg:hidden bg-orange-500 mt-2 rounded-full" />
+                </h2>
                 <Link
                     to="/products"
-                    className="text-orange-600 lg:text-white font-medium hover:underline transition-colors flex items-center gap-1"
+                    className="text-orange-600 lg:text-white font-medium transition-colors flex items-center gap-2"
                 >
                     See All
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
@@ -75,18 +73,18 @@ const FeatureProducts = ({ products }) => {
                 </Link>
             </div>
 
-            <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-1 lg:gap-4'>
+            <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-1 lg:gap-2'>
                 {products.map((p, i) => (
-                    <div key={i} className='bg-white rounded-lg shadow-sm transition-all duration-300 group overflow-hidden relative flex flex-col border border-gray-100 hover:border-orange-200'>
+                    <div key={i} className='bg-white rounded-lg shadow-sm hover:shadow-lg transition-all duration-300 group overflow-hidden flex flex-col'>
                         <Link to={`/product/details/${p.slug}`} className='relative flex-1'>
                             {p.discount && (
-                                <div className='absolute left-2 top-2 bg-orange-600 text-white px-2 py-1 rounded-full text-xs font-bold z-10 shadow-sm'>
+                                <div className='absolute left-1 top-1 bg-orange-500 text-white px-3 py-1 rounded-lg text-xs font-bold z-10'>
                                     {p.discount}% OFF
                                 </div>
                             )}
-                            <div className='aspect-square overflow-hidden bg-gray-50'>
+                            <div className='aspect-square overflow-hidden'>
                                 <img
-                                    className='w-full h-full object-contain transition-transform duration-500 group-hover:scale-105 p-2'
+                                    className='w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105'
                                     src={p.images[0]}
                                     alt={p.name}
                                     loading='lazy'
@@ -95,52 +93,47 @@ const FeatureProducts = ({ products }) => {
                         </Link>
 
                         {/* Action Buttons */}
-                        <div className='absolute top-40 hidden lg:flex right-3 flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300'>
-                            <button
-                                onClick={(e) => add_wishlist(p, e)}
-                                className='w-9 h-9 flex items-center justify-center bg-white rounded-full shadow-md hover:bg-orange-600 hover:text-white text-gray-800 transition-all'
-                                aria-label="Add to wishlist"
-                            >
-                                <AiFillHeart className='w-4 h-4' />
-                            </button>
+                        <div className='absolute top-[10rem] hidden lg:block right-3 flex flex-col gap-3'>
                             <button
                                 onClick={(e) => add_card(p._id, e)}
-                                className='w-9 h-9 flex items-center justify-center bg-white rounded-full shadow-md hover:bg-orange-600 hover:text-white text-gray-800 transition-all'
+                                className='w-9 h-9 flex mb-3 items-center justify-center bg-white rounded-full shadow-md hover:bg-gray-900 hover:text-white text-gray-800 transition-all'
                                 aria-label="Add to cart"
                             >
                                 <AddShoppingCartIcon className='w-5 h-5' />
                             </button>
                         </div>
 
-                        <div className='absolute top-2 right-2 lg:hidden flex gap-1'>
-                            <button
-                                onClick={(e) => add_card(p._id, e)}
-                                className='w-8 h-8 flex items-center justify-center bg-white/90 rounded-full shadow hover:bg-orange-600 hover:text-white transition-all'
-                                aria-label="Add to cart"
-                            >
-                                <ShoppingCartOutlinedIcon className='w-4 h-4 text-orange-600 hover:text-white' />
-                            </button>
-                        </div>
 
-                        <div className="py-3 px-3 text-gray-700 flex flex-col gap-1">
+                        <div className="relative py-3 px-2 text-gray-700">
+
+                            <div className='absolute right-1 -top-11 flex flex-col gap-2'>
+                                <button
+                                    onClick={(e) => add_card(p._id, e)}
+                                    className='w-10 h-10 flex items-center justify-center bg-white rounded-full shadow-md hover:bg-gray-900 hover:text-white transition-all'
+                                    aria-label="Add to cart"
+                                >
+                                    <ShoppingCartOutlinedIcon className='w-6 h-6 text-orange-600' />
+                                </button>
+                            </div>
+
                             <Link to={`/product/details/${p.slug}`} className='hover:text-orange-600'>
-                                <h2 className="text-sm font-semibold line-clamp-1">
+                                <h2 className="text-sm md:text-base font-semibold line-clamp-1">
                                     {p.name}
                                 </h2>
                             </Link>
 
-                            <div className="flex items-center gap-1">
+                            <div className="flex items-center my-1 gap-1">
                                 <Ratings ratings={p.rating} />
                                 <span className="text-xs text-gray-500">({p.rating})</span>
                             </div>
 
-                            <div className="flex flex-wrap items-center gap-1 mt-1">
-                                <span className="text-base font-bold text-orange-600">
-                                    ₦{(p.price - (p.price * p.discount) / 100).toLocaleString()}
+                            <div className="flex flex-row flex-wrap items-center gap-2 md:gap-1">
+                                <span className="text-[15px] font-base text-black">
+                                    ₦ {(p.price - (p.price * p.discount) / 100).toLocaleString()}
                                 </span>
                                 {p.discount > 0 && (
-                                    <del className="text-gray-400 text-sm">
-                                        ₦{p.price.toLocaleString()}
+                                    <del className="text-gray-500 text-[13px] font-base">
+                                        ₦ {p.price.toLocaleString()}
                                     </del>
                                 )}
                             </div>

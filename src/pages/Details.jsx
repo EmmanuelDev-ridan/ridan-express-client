@@ -41,8 +41,12 @@ import {
 import toast from "react-hot-toast";
 
 const Details = () => {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+    
     const { card_product_count } = useSelector(state => state.card);
-    const { card_products, price, } = useSelector((state) => state.card);
+    const { price, } = useSelector((state) => state.card);
     const navigate = useNavigate();
     const { slug } = useParams();
     const dispatch = useDispatch();
@@ -188,11 +192,20 @@ const Details = () => {
                     productId: product._id,
                     sellerId: product.sellerId,
                 })
-            );
+            ).then(() => {
+                // Refresh cart data after adding item
+                dispatch(get_card_products(userInfo.id));
+            });
         } else {
             navigate("/login");
         }
     };
+
+    useEffect(() => {
+        if (userInfo?.id) {
+            dispatch(get_card_products(userInfo.id));
+        }
+    }, [dispatch, userInfo, successMessage]); // Add successMessage as dependency
 
     const add_wishlist = () => {
         if (userInfo) {
@@ -825,13 +838,13 @@ const Details = () => {
                             <span className="text-sm ml-1">Cart items</span>
                             <span className="flex items-center h-10 px-2 bg-orange-500 rounded-full gap-2 hover:bg-orange-600 transition-colors">
                                 <span className="text-sm font-base">
-                                    ₦  {price.toLocaleString()}
+                                    ₦ {price.toLocaleString()}
                                 </span>
                                 <div className="bg-white rounded-full h-7 w-7 flex justify-center items-center">
                                     <AiOutlineShoppingCart className="relative text-lg text-black" />
                                     {/* Cart count badge */}
                                     {card_product_count > 0 && (
-                                        <span className="absolute top-1 right-7 border border-white text-xs w-5 h-5 rounded-full flex items-center justify-center bg-red-500 text-white">
+                                        <span className="absolute top-1 right-7 border-2 border-white text-xs w-5 h-5 rounded-full flex items-center justify-center bg-orange-500 text-white">
                                             {card_product_count}
                                         </span>
                                     )}
