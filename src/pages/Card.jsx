@@ -134,7 +134,7 @@ const Card = () => {
                                                                 onClick={() => dispatch(delete_card_product(pt._id))}
                                                                 className="text-sm text-red-500 hover:text-red-600 flex items-center gap-1"
                                                             >
-                                                                <RiDeleteBin6Line className="text-base" />
+                                                                <RiDeleteBin6Line className="text-base text-red-400" />
                                                                 Remove
                                                             </button>
                                                         </div>
@@ -168,7 +168,7 @@ const Card = () => {
                                                                 ₦{(pt?.productInfo?.price - Math.floor((pt?.productInfo?.price * pt?.productInfo?.discount) / 100)).toLocaleString()}
                                                             </p>
                                                             {pt?.productInfo?.discount > 0 && (
-                                                                <span className="text-xs bg-orange-100 text-orange-600 px-2 py-0.5 rounded-full">
+                                                                <span className="text-xs bg-green-100 text-green-600 px-2 py-0.5 rounded-full">
                                                                     {pt?.productInfo?.discount}% OFF
                                                                 </span>
                                                             )}
@@ -344,7 +344,7 @@ const Card = () => {
                                                             onClick={() => dispatch(delete_card_product(pt._id))}
                                                             className="text-gray-400 hover:text-red-500 ml-2"
                                                         >
-                                                            <RiDeleteBin6Line className="text-lg" />
+                                                            <RiDeleteBin6Line className="text-lg text-red-400" />
                                                         </button>
                                                     </div>
                                                     <p className="text-xs text-gray-500 mb-1">
@@ -375,11 +375,7 @@ const Card = () => {
                                                                 <p className="text-sm font-semibold text-gray-900">
                                                                     ₦{(pt?.productInfo?.price - Math.floor((pt?.productInfo?.price * pt?.productInfo?.discount) / 100)).toLocaleString()}
                                                                 </p>
-                                                                {pt?.productInfo?.discount > 0 && (
-                                                                    <span className="text-[10px] bg-orange-100 text-orange-600 px-1 py-0.5 rounded-full">
-                                                                        {pt?.productInfo?.discount}% OFF
-                                                                    </span>
-                                                                )}
+                                                                
                                                             </div>
                                                             {pt?.productInfo?.discount > 0 && (
                                                                 <p className="text-xs text-gray-400 line-through">
@@ -435,7 +431,7 @@ const Card = () => {
                             </div>
 
                             {/* Order Summary Section - Mobile */}
-                            <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
+                            <div className="bg-white p-4 rounded-lg sticky bottom-5 shadow-sm border border-gray-200">
                                 <h2 className="text-lg font-bold text-gray-900 mb-4">Order Summary</h2>
                                 <div className="space-y-3">
                                     <div className="flex justify-between items-center">
@@ -489,25 +485,7 @@ const Card = () => {
                 </div>
             </main>
 
-            {/* Mobile Bottom Checkout Bar */}
-            {card_products.length > 0 && (
-                <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white shadow-lg border-t border-gray-200 p-3 z-50">
-                    <div className="flex justify-between items-center">
-                        <div>
-                            <p className="text-xs text-gray-500">Total</p>
-                            <p className="text-lg font-bold text-gray-900">
-                                ₦{(price + shipping_fee - totalDiscount)?.toLocaleString()}
-                            </p>
-                        </div>
-                        <button
-                            onClick={redirect}
-                            className="px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white font-medium rounded-lg shadow"
-                        >
-                            Checkout ({buy_product_item})
-                        </button>
-                    </div>
-                </div>
-            )}
+            
 
             <div className='hidden lg:block'>
                 <Footer />

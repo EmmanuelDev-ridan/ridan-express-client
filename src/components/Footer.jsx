@@ -117,7 +117,7 @@ const Footer = () => {
             </div>
 
             {/* Payment Methods */}
-            <div className='bg-[#232F3E] py-4 border-t border-gray-600'>
+            {/* <div className='bg-[#232F3E] py-4 border-t border-gray-600'>
                 <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
                     <div className='flex flex-col md:flex-row justify-between items-center gap-4'>
                         <div className='flex items-center gap-2'>
@@ -136,7 +136,7 @@ const Footer = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
 
             {/* Copyright */}
             <div className='py-6'>

@@ -34,7 +34,7 @@ export const get_products = createAsyncThunk(
             } = await api.get('/home/get-products')
             return fulfillWithValue(data)
         } catch (error) {
-           
+
             console.log(error.response)
             return rejectWithValue(error.response.data || error.response)
         }
@@ -51,7 +51,7 @@ export const get_product = createAsyncThunk(
             const {
                 data
             } = await api.get(`/home/get-product/${slug}`)
-          
+
             return fulfillWithValue(data)
         } catch (error) {
             return rejectWithValue(error.response.data || error.response)
@@ -113,6 +113,18 @@ export const query_products = createAsyncThunk(
         }
     }
 )
+
+export const search_suggestions = createAsyncThunk(
+    'home/get_search_suggestions',
+    async (query, { fulfillWithValue, rejectWithValue }) => {
+        try {
+            const { data } = await api.get(`/home/search-suggestions?q=${encodeURIComponent(query)}`);
+            return fulfillWithValue(data);
+        } catch (error) {
+            return rejectWithValue(error.response?.data || error.message);
+        }
+    }
+);
 
 export const customer_review = createAsyncThunk(
     'review/customer_review',
@@ -232,6 +244,24 @@ export const homeReducer = createSlice({
             payload
         }) => {
             state.banners = payload.banners
+        },
+
+        // Search Suggestions
+        [search_suggestions.pending]: (state) => {
+            state.searchLoading = true;
+            state.searchError = null;
+        },
+        [search_suggestions.fulfilled]: (state, {
+            payload
+        }) => {
+            state.searchLoading = false;
+            state.searchSuggestions = payload.suggestions;
+        },
+        [search_suggestions.rejected]: (state, {
+            payload
+        }) => {
+            state.searchLoading = false;
+            state.searchError = payload?.message || 'Failed to load suggestions';
         },
 
     }

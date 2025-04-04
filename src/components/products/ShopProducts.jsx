@@ -52,7 +52,7 @@ const ShopProducts = ({ styles, products }) => {
     }
 
     return (
-        <div className='grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-0 lg:gap-2'>
+        <div className='grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-0 lg:gap-2'>
         {products.map((p, i) => (
             <div
                 key={i}
