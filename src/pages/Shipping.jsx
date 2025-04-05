@@ -47,141 +47,150 @@ const Shipping = () => {
         }))
     }
     return (
-        <div>
+        <div className="min-h-screen flex flex-col">
             <Headers />
-            <div className='bg-[#eeeeee] w-full'>
-
-                <div className='max-w-[1440px] mx-auto px-16 sm:px-5 md-lg:px-12 md:px-10 pt-6'>
-                    <section style={{ backgroundImage: 'url("/images/banner/order.jpg")' }} className='h-[220px]  bg-cover bg-no-repeat relative bg-left'>
-                        <div className='absolute left-0 top-0 w-full h-full bg-[#2422228a]'>
-                            <div className='w-full h-full mx-auto'>
-                                <div className='flex flex-col justify-center gap-1 items-center h-full w-full text-white'>
-                                    <h2 className='text-3xl font-bold'>Shop.my</h2>
-                                    <div className='flex justify-center items-center gap-2 text-2xl w-full'>
-                                        <Link to='/'>Home</Link>
-                                        <span className='pt-2'><MdOutlineKeyboardArrowRight /></span>
-                                        <span>Place Order</span>
-                                    </div>
-                                </div>
+            <div className='bg-gray-50 flex-grow'>
+                <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8'>
+                    <section className='relative h-64 rounded-xl overflow-hidden bg-gradient-to-r from-blue-600 to-purple-600'>
+                        <div className='absolute inset-0 bg-black/40 flex items-center justify-center'>
+                            <div className='text-center text-white space-y-4'>
+                                <h1 className='text-4xl font-bold tracking-tight'>Shop.my</h1>
+                                <nav className='flex items-center justify-center gap-2 text-lg font-medium'>
+                                    <Link to='/' className='hover:text-blue-200 transition-colors'>Home</Link>
+                                    <MdOutlineKeyboardArrowRight className="w-5 h-5" />
+                                    <span className='text-gray-200'>Place Order</span>
+                                </nav>
                             </div>
                         </div>
                     </section>
                 </div>
             </div>
-            <section className='bg-[#eeeeee]'>
-                <div className='max-w-[1440px] mx-auto px-16 sm:px-5 md-lg:px-12 md:px-10 py-16'>
-                    <div className='w-full flex flex-wrap'>
-                        <div className='w-[67%] md-lg:w-full'>
-                            <div className="flex flex-col gap-3">
-                                <div className="bg-white p-6 shadow-sm rounded-md">
-                                    {
-                                        !res && <>
-                                            <h2 className='text-slate-600 font-bold pb-3'>Shipping Information</h2>
-                                            <form onSubmit={save}>
-                                                <div className='flex md:flex-col md:gap-2 w-full gap-5 text-slate-600'>
-                                                    <div className='flex flex-col gap-1 mb-2 w-full'>
-                                                        <label htmlFor="name">Name</label>
-                                                        <input onChange={inputHandle} value={state.name} type="text" className='w-full px-3 py-2 border border-slate-200 outline-none focus:border-indigo-500 rounded-md' name='name' placeholder='name' id='name' />
+            <section className='bg-gray-50 flex-grow'>
+                <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12'>
+                    <div className='grid grid-cols-1 lg:grid-cols-3 gap-8'>
+                        <div className='lg:col-span-2 space-y-6'>
+                            <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-200">
+                                {
+                                    !res ? (
+                                        <>
+                                            <h2 className='text-2xl font-semibold text-gray-900 mb-6'>Shipping Information</h2>
+                                            <form onSubmit={save} className="space-y-6">
+                                                <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
+                                                    <div className='space-y-2'>
+                                                        <label htmlFor="name" className='block text-sm font-medium text-gray-700'>Name</label>
+                                                        <input onChange={inputHandle} value={state.name} type="text" className='w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500' name='name' placeholder='John Doe' id='name' />
                                                     </div>
-                                                    <div className='flex flex-col gap-1 mb-2 w-full'>
-                                                        <label htmlFor="address">Address</label>
-                                                        <input onChange={inputHandle} value={state.address} type="text" className='w-full px-3 py-2 border border-slate-200 outline-none focus:border-indigo-500 rounded-md' name='address' placeholder='House no / building / strreet /area' id='address' />
+                                                    <div className='space-y-2'>
+                                                        <label htmlFor="address" className='block text-sm font-medium text-gray-700'>Address</label>
+                                                        <input onChange={inputHandle} value={state.address} type="text" className='w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500' name='address' placeholder='House no / building / strreet /area' id='address' />
                                                     </div>
-                                                </div>
-                                                <div className='flex md:flex-col md:gap-2 w-full gap-5 text-slate-600'>
-                                                    <div className='flex flex-col gap-1 mb-2 w-full'>
-                                                        <label htmlFor="phone">Phone</label>
-                                                        <input onChange={inputHandle} value={state.phone} type="text" className='w-full px-3 py-2 border border-slate-200 outline-none focus:border-indigo-500 rounded-md' name='phone' placeholder='phone' id='phone' />
+                                                    <div className='space-y-2'>
+                                                        <label htmlFor="phone" className='block text-sm font-medium text-gray-700'>Phone</label>
+                                                        <input onChange={inputHandle} value={state.phone} type="text" className='w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500' name='phone' placeholder='+1 234 567 890' id='phone' />
                                                     </div>
-                                                    <div className='flex flex-col gap-1 mb-2 w-full'>
-                                                        <label htmlFor="post">Post</label>
-                                                        <input onChange={inputHandle} value={state.post} type="text" className='w-full px-3 py-2 border border-slate-200 outline-none focus:border-indigo-500 rounded-md' name='post' placeholder='post' id='post' />
+                                                    <div className='space-y-2'>
+                                                        <label htmlFor="post" className='block text-sm font-medium text-gray-700'>Post</label>
+                                                        <input onChange={inputHandle} value={state.post} type="text" className='w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500' name='post' placeholder='Post code' id='post' />
                                                     </div>
-                                                </div>
-                                                <div className='flex md:flex-col md:gap-2 w-full gap-5 text-slate-600'>
-                                                    <div className='flex flex-col gap-1 mb-2 w-full'>
-                                                        <label htmlFor="province">Province</label>
-                                                        <input onChange={inputHandle} value={state.province} type="text" className='w-full px-3 py-2 border border-slate-200 outline-none focus:border-indigo-500 rounded-md' name='province' placeholder='province' id='province' />
+                                                    <div className='space-y-2'>
+                                                        <label htmlFor="province" className='block text-sm font-medium text-gray-700'>Province</label>
+                                                        <input onChange={inputHandle} value={state.province} type="text" className='w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500' name='province' placeholder='Province' id='province' />
                                                     </div>
-                                                    <div className='flex flex-col gap-1 mb-2 w-full'>
-                                                        <label htmlFor="city">City</label>
-                                                        <input onChange={inputHandle} value={state.city} type="text" className='w-full px-3 py-2 border border-slate-200 outline-none focus:border-indigo-500 rounded-md' name='city' placeholder='city' id='city' />
+                                                    <div className='space-y-2'>
+                                                        <label htmlFor="city" className='block text-sm font-medium text-gray-700'>City</label>
+                                                        <input onChange={inputHandle} value={state.city} type="text" className='w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500' name='city' placeholder='City' id='city' />
                                                     </div>
-                                                </div>
-                                                <div className='flex md:flex-col md:gap-2 w-full gap-5 text-slate-600'>
-                                                    <div className='flex flex-col gap-1 mb-2 w-full'>
-                                                        <label htmlFor="area">Area</label>
-                                                        <input onChange={inputHandle} value={state.area} type="text" className='w-full px-3 py-2 border border-slate-200 outline-none focus:border-indigo-500 rounded-md' name='area' placeholder='area' id='province' />
-                                                    </div>
-                                                    <div className='flex flex-col gap-1 mt-3 w-full'>
-                                                        <button className='px-3 py-[6px] rounded-sm hover:shadow-indigo-500/20 hover:shadow-lg bg-indigo-500 text-white'>Save</button>
+                                                    <div className='space-y-2'>
+                                                        <label htmlFor="area" className='block text-sm font-medium text-gray-700'>Area</label>
+                                                        <input onChange={inputHandle} value={state.area} type="text" className='w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500' name='area' placeholder='Area' id='province' />
                                                     </div>
                                                 </div>
+                                                <button className='w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200'>
+                                                    Save Shipping Details
+                                                </button>
                                             </form>
                                         </>
-                                    }
-                                    {
-                                        res && <div className='flex flex-col gap-1'>
-                                            <h2 className='text-slate-600 font-semibold pb-2'>Deliver to {state.name}</h2>
-                                            <p>
-                                                <span className='bg-blue-200 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded'>Home</span>
-                                                <span className='text-slate-600 text-sm'>{state.address} {state.province} {state.city} {state.area}</span>
-                                                <span onClick={() => setRes(false)} className='text-indigo-500 cursor-pointer'> change</span>
-                                            </p>
-                                            <p className='text-slate-600 text-sm'>Email to sheikhfarid@gmail.com</p>
+                                    ) : (
+                                        <div className="space-y-4">
+                                            <div className="flex justify-between items-start">
+                                                <h2 className="text-xl font-semibold text-gray-900">Delivery to {state.name}</h2>
+                                                <button
+                                                    onClick={() => setRes(false)}
+                                                    className="text-purple-600 hover:text-purple-700 font-medium"
+                                                >
+                                                    Edit
+                                                </button>
+                                            </div>
+                                            <div className="bg-gray-50 p-4 rounded-lg">
+                                                <p className="text-gray-700">
+                                                    {state.address}<br />
+                                                    {state.city}, {state.province}<br />
+                                                    {state.area} {state.post}
+                                                </p>
+                                                <p className="mt-3 text-sm text-gray-500">
+                                                    Phone: {state.phone}<br />
+                                                    Email: sheikhfarid@gmail.com
+                                                </p>
+                                            </div>
                                         </div>
-                                    }
-                                </div>
-                                {
-                                    products.map((p, i) => <div key={i} className='flex bg-white p-4 flex-col gap-2'>
-                                        <div className='flex justify-start items-center'>
-                                            <h2 className='text-md text-slate-600'>{p.shopName}</h2>
-                                        </div>
-                                        {
-                                            p.products.map((pt, j) => <div key={i + 99} className='w-full flex flex-wrap'>
-                                                <div className='flex sm:w-full gap-2 w-7/12'>
-                                                    <div className='flex gap-2 justify-start items-center'>
-                                                        <img className='w-[80px] h-[80px]' src={pt.productInfo.images[0]} alt="product image" />
-                                                        <div className='pr-4 text-slate-600'>
-                                                            <h2 className='text-md'>{pt.productInfo.name}</h2>
-                                                            <span className='text-sm'>Brand : {pt.productInfo.brand}</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className='flex justify-end w-5/12 sm:w-full sm:mt-3'>
-                                                    <div className='pl-4 sm:pl-0'>
-                                                        <h2 className='text-lg text-orange-500'>${pt.productInfo.price - Math.floor((pt.productInfo.price * pt.productInfo.discount) / 100)}</h2>
-                                                        <p className='line-through'>${pt.productInfo.price}</p>
-                                                        <p>-{pt.productInfo.discount}%</p>
-                                                    </div>
-                                                </div>
-                                            </div>)
-                                        }
-                                    </div>)
+                                    )
                                 }
                             </div>
+
+                            {products.map((p, i) => (
+                                <div key={i} className='bg-white p-6 rounded-xl shadow-sm border border-gray-200 space-y-4'>
+                                    <h3 className='text-lg font-semibold text-gray-900'>{p.shopName}</h3>
+                                    {p.products.map((pt, j) => (
+                                        <div key={i + 99} className='flex flex-wrap py-4 border-b border-gray-200 last:border-0'>
+                                            <div className='flex items-center w-full md:w-7/12 gap-4'>
+                                                <img className='w-20 h-20 rounded-lg object-cover' src={pt.productInfo.images[0]} alt="product" />
+                                                <div>
+                                                    <h4 className='text-gray-900 font-medium'>{pt.productInfo.name}</h4>
+                                                    <p className='text-sm text-gray-500'>Brand: {pt.productInfo.brand}</p>
+                                                </div>
+                                            </div>
+                                            <div className='w-full md:w-5/12 mt-4 md:mt-0 md:pl-4'>
+                                                <div className='flex flex-col items-end'>
+                                                    <div className='text-lg font-semibold text-orange-600'>
+                                                        ${pt.productInfo.price - Math.floor((pt.productInfo.price * pt.productInfo.discount) / 100)}
+                                                    </div>
+                                                    <div className='text-sm text-gray-500 line-through'>${pt.productInfo.price}</div>
+                                                    <div className='text-sm text-green-600 font-medium'>Save {pt.productInfo.discount}%</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            ))}
                         </div>
-                        <div className='w-[33%] md-lg:w-full'>
-                            <div className="pl-3 md-lg:pl-0">
-                                <div className='bg-white font-medium p-5 text-slate-600 flex flex-col gap-3'>
-                                    <h2 className='text-xl font-semibold'>Order Summary</h2>
-                                    <div className='flex justify-between items-center'>
-                                        <span>Items Total({price})</span>
-                                        <span>${price}</span>
+
+                        <div className='lg:col-span-1'>
+                            <div className='bg-white p-6 rounded-xl shadow-sm border border-gray-200 sticky top-6'>
+                                <h2 className='text-2xl font-semibold text-gray-900 mb-6'>Order Summary</h2>
+                                <div className='space-y-4'>
+                                    <div className='flex justify-between'>
+                                        <span className='text-gray-600'>Items ({price})</span>
+                                        <span className='font-medium text-gray-900'>${price}</span>
                                     </div>
-                                    <div className='flex justify-between items-center'>
-                                        <span>Delivery Fee</span>
-                                        <span>${shipping_fee}</span>
+                                    <div className='flex justify-between'>
+                                        <span className='text-gray-600'>Delivery Fee</span>
+                                        <span className='font-medium text-gray-900'>${shipping_fee}</span>
                                     </div>
-                                    <div className='flex justify-between items-center'>
-                                        <span>Total Payment</span>
-                                        <span>${price + shipping_fee}</span>
+                                    <div className='border-t border-gray-200 pt-4'>
+                                        <div className='flex justify-between'>
+                                            <span className='text-lg font-semibold text-gray-900'>Total</span>
+                                            <span className='text-lg font-bold text-orange-600'>${price + shipping_fee}</span>
+                                        </div>
                                     </div>
-                                    <div className='flex justify-between items-center'>
-                                        <span>Total</span>
-                                        <span>${price + shipping_fee}</span>
-                                    </div>
-                                    <button onClick={placeOrder} disabled={res ? false : true} className={`px-5 py-[6px] rounded-sm hover:shadow-orange-500/20 hover:shadow-lg ${res ? 'bg-orange-500' : 'bg-orange-300'} text-sm text-white uppercase`}>Place Order</button>
+                                    <button
+                                        onClick={placeOrder}
+                                        disabled={!res}
+                                        className={`w-full py-3 px-6 rounded-lg font-semibold transition-all duration-200 ${res ? 'bg-orange-600 hover:bg-orange-700 text-white'
+                                            : 'bg-gray-300 cursor-not-allowed text-gray-500'
+                                            }`}
+                                    >
+                                        Place Order
+                                    </button>
                                 </div>
                             </div>
                         </div>

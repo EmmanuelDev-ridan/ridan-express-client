@@ -78,7 +78,7 @@ const FeatureProducts = ({ products }) => {
                     <div key={i} className='bg-white rounded-lg shadow-sm hover:shadow-lg transition-all duration-300 group overflow-hidden flex flex-col'>
                         <Link to={`/product/details/${p.slug}`} className='relative flex-1'>
                             {p.discount && (
-                                <div className='absolute left-1 top-1 bg-orange-500 text-white px-3 py-1 rounded-lg text-xs font-bold z-10'>
+                                <div className='absolute left-1 top-1 bg-orange-500 text-white px-3 py-1 rounded-lg text-xs font-semibold z-0 lg:z-10'>
                                     {p.discount}% OFF
                                 </div>
                             )}
@@ -116,7 +116,7 @@ const FeatureProducts = ({ products }) => {
                                 </button>
                             </div>
 
-                            <Link to={`/product/details/${p.slug}`} className='hover:text-orange-600'>
+                            <Link to={`/product/debg-gradient-to-r from-gray-800 to-indigo-700tails/${p.slug}`} className='hover:text-orange-600'>
                                 <h2 className="text-sm md:text-base font-semibold line-clamp-1">
                                     {p.name}
                                 </h2>

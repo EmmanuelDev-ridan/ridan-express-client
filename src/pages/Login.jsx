@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
-// import Headers from '../components/Headers';
-// import Footer from '../components/Footer';
 import { FaFacebookF, FaGoogle } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import { PulseLoader } from 'react-spinners';
 import { IoArrowBack } from 'react-icons/io5';
 import { useSelector, useDispatch } from 'react-redux';
 import { customer_login, messageClear } from '../store/reducers/authReducer';
-import ridanLogo from '../assets/Images/banner/logo2.png'
+import ridanLogo from '../assets/Images/banner/logo2.png';
 import toast from 'react-hot-toast';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
+import axios from 'axios';
 
 const Login = () => {
     const { loader, successMessage, errorMessage, userInfo } = useSelector(state => state.auth);
@@ -21,6 +20,7 @@ const Login = () => {
         password: ''
     });
     const [showPassword, setShowPassword] = useState(false);
+    const [showResendButton, setShowResendButton] = useState(false);
 
     const inputHandle = (e) => {
         setState({
@@ -34,12 +34,27 @@ const Login = () => {
         dispatch(customer_login(state));
     };
 
+    const handleResendVerification = async () => {
+        try {
+            await axios.post(`${process.env.REACT_APP_API_URL}/api/customer/resend-verification`, {
+                email: state.email
+            });
+            toast.success('Verification email resent! Please check your inbox.');
+            setShowResendButton(false);
+        } catch (error) {
+            toast.error(error.response?.data?.error || 'Failed to resend verification email');
+        }
+    };
+
     useEffect(() => {
         if (successMessage) {
             toast.success(successMessage);
             dispatch(messageClear());
         }
         if (errorMessage) {
+            if (errorMessage.includes('not verified')) {
+                setShowResendButton(true);
+            }
             toast.error(errorMessage);
             dispatch(messageClear());
         }
@@ -50,7 +65,6 @@ const Login = () => {
 
     return (
         <div className="min-h-screen flex flex-col bg-white">
-
             <div className='fixed top-0 left-0 right-0 py-4 px-10 flex items-center justify-between'>
                 <Link to="/" className="text-gray-700">
                     <IoArrowBack className="text-xl" />
@@ -146,6 +160,21 @@ const Login = () => {
                                     >
                                         Sign In
                                     </button>
+
+                                    {showResendButton && (
+                                        <div className="mt-4 text-center text-sm">
+                                            <p className="text-gray-600 mb-2">
+                                                You need to verify your email to continue.
+                                            </p>
+                                            <button
+                                                type="button"
+                                                onClick={handleResendVerification}
+                                                className="text-orange-600 hover:text-orange-700 font-medium underline"
+                                            >
+                                                Resend Verification Email
+                                            </button>
+                                        </div>
+                                    )}
                                 </form>
 
                                 <div className="mt-6">
@@ -231,7 +260,6 @@ const Login = () => {
                     </div>
                 </div>
             </main>
-
         </div>
     );
 };

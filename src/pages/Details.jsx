@@ -27,8 +27,6 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 import { AiFillHeart, AiOutlineShoppingCart } from 'react-icons/ai'
-import { FaEye } from 'react-icons/fa'
-import LocationSearchingIcon from '@mui/icons-material/LocationSearching';
 import { get_card_products } from '../store/reducers/cardReducer';
 
 import axios from 'axios';
@@ -350,7 +348,7 @@ const Details = () => {
     return (
         <div className="bg-gray-100 overflow-x-hidden <div className={`fixed bottom-0 left-0 right-0 transition-transform duration-300 ${visible ? 'translate-y-0' : 'translate-y-full'}`}>">
             <Headers />
-            <div className=" py-2 mb-0 bg-gray-800 lg:mb-3 mt-[8rem] lg:mt-[9rem] md:mb-0">
+            <div className=" py-2 mb-0 bg-gray-800 lg:mb-3 mt-[4rem] lg:mt-[7rem] md:mb-0">
                 <div className="w-[85%] xl:w-[90%] lg:w-[95%] md:w-full mx-auto">
                     <Breadcrumb aria-label="breadcrumb" className="px-0 md:px-7 lg:px-5 dark:bg-gray-800">
                         <Breadcrumb.Item href="/">
@@ -439,7 +437,7 @@ const Details = () => {
 
                         <div className="flex flex-col gap-4 lg:gap-6 h-fit bg-white p-6 md:p-8 rounded-xl border border-gray-100 shadow-sm">
                             <div className="flex flex-col gap-5">
-                                <h1 className="text-2xl lg:text-3xl font-base text-gray-900 tracking-tight">
+                                <h1 className="text-3xl lg:text-3xl font-base text-gray-900 tracking-tight">
                                     {product.name}
                                 </h1>
 

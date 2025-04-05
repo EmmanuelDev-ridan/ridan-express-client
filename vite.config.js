@@ -10,7 +10,7 @@ export default defineConfig({
 
         proxy: {
             '/api': {
-                target: 'https://ridanexpress-backend.onrender.com', // Your backend URL
+                target: 'http://localhost:5000', // Your backend URL
                 changeOrigin: true,
                 secure: false,
                 // rewrite: (path) => path.replace(/^\/api/, ''), // Optional: Adjust based on your API routes

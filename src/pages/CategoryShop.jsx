@@ -80,13 +80,13 @@ const CategoryShops = () => {
             </div>
 
             {/* Mobile Breadcrumb */}
-            <div className="lg:hidden bg-gray-900 shadow-sm mt-[8rem] lg:mt-0 py-2 pb-3 px-4">
+            <div className="lg:hidden bg-gradient-to-r from-gray-800 to-indigo-700 shadow-sm mt-[4rem] lg:mt-0 py-2 pb-3 px-4">
                 <div className="flex items-center text-sm text-gray-600 overflow-x-auto whitespace-nowrap">
                     <Link to="/" className="hover:text-orange-600 text-white">Home</Link>
                     <MdOutlineKeyboardArrowRight className="mx-1 text-gray-400" />
                     <Link to="/categories" className="hover:text-orange-600 text-white">Categories</Link>
                     <MdOutlineKeyboardArrowRight className="mx-1 text-gray-400" />
-                    <span className="hover:text-orange-600 text-orange-400 font-medium">{category}</span>
+                    <span className="hover:text-orange-600 text-white font-medium">{category}</span>
                 </div>
             </div>
 

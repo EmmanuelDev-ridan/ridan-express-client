@@ -14,6 +14,11 @@ import { get_card_products, get_wishlist_products } from '../store/reducers/card
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import CloseIcon from '@mui/icons-material/Close';
+import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
+import StorefrontOutlinedIcon from '@mui/icons-material/StorefrontOutlined';// import StorefrontIcon from '@mui/icons-material/Storefront';
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
+import ChevronRightOutlinedIcon from '@mui/icons-material/ChevronRightOutlined';
 
 const Headers = () => {
     const dispatch = useDispatch();
@@ -62,9 +67,9 @@ const Headers = () => {
         }
     }, []);
 
-    const debouncedFetchSuggestions = useMemo(() => 
+    const debouncedFetchSuggestions = useMemo(() =>
         debounce(fetchSuggestions, 300),
-    [debounce, fetchSuggestions]);
+        [debounce, fetchSuggestions]);
 
     // Search handlers
     const handleSearchChange = useCallback((value) => {
@@ -149,7 +154,7 @@ const Headers = () => {
                 <input
                     type="text"
                     value={searchValue}
-                    className="w-full px-4 py-3 pr-12 rounded-full border-2 border-gray-200 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent placeholder-gray-400 text-gray-700"
+                    className="w-full px-4 py-3 pr-12 rounded-full border-2 text-gray-800 border-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent placeholder-gray-400 text-gray-700"
                     placeholder="Search products..."
                     onChange={(e) => handleSearchChange(e.target.value)}
                     onKeyPress={(e) => e.key === 'Enter' && search()}
@@ -319,7 +324,7 @@ const Headers = () => {
                         className="fixed inset-0 bg-black/50 z-40 transition-opacity opacity-100 visible"
                     ></div>
 
-                    <div className="fixed top-0 left-0 h-full w-80 bg-white z-50 transform transition-transform translate-x-0 shadow-xl">
+                    <div className="fixed top-0 left-0 h-full w-[100%] bg-white z-50 transform transition-transform translate-x-0 shadow-xl">
                         <div className="h-full flex flex-col">
                             <div className="flex items-center justify-between p-4 border-b">
                                 <Link to="/" onClick={() => setShowSidebar(false)}>
@@ -327,7 +332,7 @@ const Headers = () => {
                                 </Link>
                                 <button
                                     onClick={() => setShowSidebar(false)}
-                                    className="p-2 rounded-full hover:bg-gray-100"
+                                    className="p-2 rounded-full text-red-500 hover:bg-gray-100"
                                 >
                                     <CloseIcon />
                                 </button>
@@ -337,16 +342,21 @@ const Headers = () => {
                                 {userInfo ? (
                                     <Link
                                         to="/dashboard"
-                                        className="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100"
+                                        className="flex justify-between items-center space-x-3 px-2 rounded-lg hover:bg-gray-100"
                                         onClick={() => setShowSidebar(false)}
                                     >
-                                        <div className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center text-orange-600">
-                                            <FaUser size={16} />
+                                        <div className="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100"
+                                        >
+                                            <div className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center text-orange-600">
+                                                <FaUser size={16} />
+                                            </div>
+                                            <div>
+                                                <div className="font-medium text-gray-900">{userInfo.name}</div>
+                                                <div className="text-xs text-gray-500">View your account</div>
+                                            </div>
                                         </div>
-                                        <div>
-                                            <div className="font-medium text-gray-900">{userInfo.name}</div>
-                                            <div className="text-xs text-gray-500">View your account</div>
-                                        </div>
+
+                                        <ChevronRightOutlinedIcon className='text-orange-500' />
                                     </Link>
                                 ) : (
                                     <Link
@@ -364,36 +374,91 @@ const Headers = () => {
                                     </Link>
                                 )}
                             </div>
+                            <div className="border border-gray-200 rounded-lg overflow-hidden">
+                                <div className="grid grid-cols-2 divide-x divide-y divide-gray-200">
+                                    {/* Track Orders */}
+                                    <div className="flex gap-2 text-center items-center p-2 px-4 hover:bg-gray-50 transition-colors cursor-pointer">
+                                        <LocationOnOutlinedIcon className='text-orange-400' />
+                                        <div className="flex flex-col items-start gap-1">
+                                            <span className="text-sm font-base text-gray-900">Track Orders</span>
+                                            <span className="text-xs text-gray-500">View order status</span>
+                                        </div>
+                                    </div>
+                                    <div className="flex gap-2 text-center items-center p-2 px-4 hover:bg-gray-50 transition-colors cursor-pointer">
+                                        <StorefrontOutlinedIcon className='text-orange-400' />
+                                        <div className="flex flex-col items-start gap-1">
+                                            <span className="text-sm font-base text-gray-900">Sell on Ridan</span>
+                                            <span className="text-xs text-gray-500">Start selling today</span>
+                                        </div>
+                                    </div>
+                                    <div className="flex gap-2 text-center items-center p-2 px-4 hover:bg-gray-50 transition-colors cursor-pointer">
+                                        <LogoutOutlinedIcon className='text-orange-400' />
+                                        <div className="flex flex-col items-start gap-1">
+                                            <span className="text-sm font-base text-gray-900">Sign Out</span>
+                                            <span className="text-xs text-gray-500">Secur account</span>
+                                        </div>
+                                    </div>
+                                    <div className="flex gap-2 text-center items-center p-2 px-4 hover:bg-gray-50 transition-colors cursor-pointer">
+                                        <HelpOutlineOutlinedIcon className='text-orange-400' />
+                                        <div className="flex flex-col items-start gap-1">
+                                            <span className="text-sm font-base text-gray-900">Help Center</span>
+                                            <span className="text-xs text-gray-500">24/7 customer support</span>
+                                        </div>
+                                    </div>
 
-                            <div className="flex-1 overflow-y-auto p-4">
-                                <h3 className="font-bold text-lg mb-3 text-gray-800">Shop Categories</h3>
-                                <ul className="space-y-2">
+                                </div>
+                            </div>
+                            <div className="flex-1 overflow-y-auto">
+                                <h3 className="font-semibold text-lg sticky top-0 h-12 items-center pt-2 pl-3 shadow-sm bg-white text-gray-800">Shop Categories</h3>
+                                <ul>
                                     {categorys.map((c, i) => (
                                         <li key={i}>
                                             <Link
                                                 to={`/products?category=${c.name}`}
-                                                className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100 transition-colors"
                                                 onClick={() => setShowSidebar(false)}
                                             >
-                                                <img
-                                                    src={c.image}
-                                                    className="w-8 h-8 rounded-full object-cover"
-                                                    alt={c.name}
-                                                    loading="lazy"
-                                                />
-                                                <span className="text-gray-700">{c.name}</span>
+                                                <div className="flex items-center justify-between p-3 px-3 border rounded-lg hover:bg-gray-100 transition-colors">
+                                                    <div className='flex justify-center items-center space-x-4'>
+                                                        <img
+                                                            src={c.image}
+                                                            className="w-10 h-10 rounded-full object-cover"
+                                                            alt={c.name}
+                                                            loading="lazy"
+                                                        />
+                                                        <span className="text-gray-700">{c.name}</span>
+                                                    </div>
+                                                    <ChevronRightOutlinedIcon className='text-orange-500' />
+                                                </div>
+
                                             </Link>
                                         </li>
                                     ))}
                                 </ul>
                             </div>
 
-                            <div className="p-4 border-t">
-                                <div className="grid grid-cols-2 gap-2">
-                                    <Link to="/help" className="p-2 text-sm text-gray-600 hover:text-orange-500">Help Center</Link>
-                                    <Link to="/about" className="p-2 text-sm text-gray-600 hover:text-orange-500">About Us</Link>
-                                    <Link to="/contact" className="p-2 text-sm text-gray-600 hover:text-orange-500">Contact</Link>
-                                    <Link to="/terms" className="p-2 text-sm text-gray-600 hover:text-orange-500">Terms</Link>
+                            <div className="border border-gray-200 rounded-lg overflow-hidden">
+                                <div className="grid grid-cols-2 divide-x divide-y divide-gray-200">
+                                    {/* Track Orders */}
+                                    <div className="flex gap-2 text-center items-center p-2 px-4 hover:bg-gray-50 transition-colors cursor-pointer">
+                                        <div className="flex flex-col items-start gap-1">
+                                            <span className="text-sm font-base text-gray-900">About Us</span>
+                                        </div>
+                                    </div>
+                                    <div className="flex gap-2 text-center items-center p-2 px-4 hover:bg-gray-50 transition-colors cursor-pointer">
+                                        <div className="flex flex-col items-start gap-1">
+                                            <span className="text-sm font-base text-gray-900">Contact</span>
+                                        </div>
+                                    </div>
+                                    <div className="flex gap-2 text-center items-center p-2 px-4 hover:bg-gray-50 transition-colors cursor-pointer">
+                                        <div className="flex flex-col items-start gap-1">
+                                            <span className="text-sm font-base text-gray-900">Terms</span>
+                                        </div>
+                                    </div>
+                                    <div className="flex gap-2 text-center items-center p-2 px-4 hover:bg-gray-50 transition-colors cursor-pointer">
+                                        <div className="flex flex-col items-start gap-1">
+                                            <span className="text-sm font-base text-gray-900">Help Center</span>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div className="flex justify-center space-x-4 mt-4">
                                     <a href="#" className="p-2 text-gray-500 hover:text-orange-500"><FaFacebookF /></a>
@@ -401,6 +466,15 @@ const Headers = () => {
                                     <a href="#" className="p-2 text-gray-500 hover:text-orange-500"><FaLinkedinIn /></a>
                                 </div>
                             </div>
+                            {/* <div className="p-4 border-t">
+                                <div className="grid grid-cols-2 gap-2">
+                                    <Link to="/help" className="p-2 border text-sm text-gray-600 hover:text-orange-500">Help Center</Link>
+                                    <Link to="/about" className="p-2 text-sm text-gray-600 hover:text-orange-500">About Us</Link>
+                                    <Link to="/contact" className="p-2 text-sm text-gray-600 hover:text-orange-500">Contact</Link>
+                                    <Link to="/terms" className="p-2 text-sm text-gray-600 hover:text-orange-500">Terms</Link>
+                                </div>
+                                <
+                            </div> */}
                         </div>
                     </div>
                 </div>
