@@ -34,15 +34,32 @@ const Login = () => {
         dispatch(customer_login(state));
     };
 
+    // const handleResendVerification = async () => {
+    //     try {
+    //         await axios.post(`${process.env.REACT_APP_API_URL}/api/resend-verification`, {
+    //             email: state.email
+    //         });
+    //         toast.success('Verification email resent! Please check your inbox.');
+    //         setShowResendButton(false);
+    //     } catch (error) {
+    //         toast.error(error.response?.data?.error || 'Failed to resend verification email');
+    //     }
+    // };
+
     const handleResendVerification = async () => {
         try {
-            await axios.post(`${process.env.REACT_APP_API_URL}/api/customer/resend-verification`, {
+            await axios.post(`${import.meta.env.VITE_API_URL}/api/resend-verification`, {
                 email: state.email
             });
-            toast.success('Verification email resent! Please check your inbox.');
+            toast.success('Verification email resent! Check your inbox.');
             setShowResendButton(false);
         } catch (error) {
-            toast.error(error.response?.data?.error || 'Failed to resend verification email');
+            console.error('Resend Error:', {
+                error: error.message,
+                response: error.response?.data,
+                email: state.email
+            });
+            toast.error(error.response?.data?.error || 'Failed to resend email');
         }
     };
 

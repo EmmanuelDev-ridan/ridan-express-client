@@ -82,7 +82,7 @@ const BottomNav = () => {
     };
 
     return (
-        <div className={`fixed bottom-0 left-0 right-0 z-5=40 bg-gray-100 shadow-xl transition-transform duration-300 ${visible ? 'translate-y-0' : 'translate-y-full'}`}>
+        <div className={`fixed bottom-0 left-0 right-0 z-40 bg-gray-900 shadow-2xl rounded-2xl transition-transform duration-300 ${visible ? 'translate-y-0' : 'translate-y-full'}`}>
             <div className="flex justify-around items-center py-3 px-2">
                 {navItems.map((item, index) => (
                     <button
@@ -90,7 +90,7 @@ const BottomNav = () => {
                         onClick={() => handleNavigation(item, index)}
                         className={`flex flex-col items-center p-2 rounded-xl transition-all ${activeTab === index
                             ? "text-orange-500 bg-orange-50"
-                            : "text-gray-500 hover:text-orange-400"
+                            : "text-slate-100 hover:text-orange-400"
                             }`}
                         style={{ minWidth: "60px" }}
                     >

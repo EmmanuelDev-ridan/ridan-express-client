@@ -100,7 +100,7 @@ const Headers = () => {
                 <input
                     type="text"
                     value={searchValue}
-                    className="w-full px-5 py-2.5 pr-16 rounded-full border border-gray-200 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200 placeholder-gray-400 text-gray-700 shadow-sm hover:shadow-md"
+                    className="w-full px-5 py-2.5 pr-16 rounded-full border border-gray-200 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200 placeholder-gray-400 text-gray-700 shadow-sm hover:shadow-lg"
                     placeholder="Search products, brands & categories..."
                     onChange={(e) => handleSearchChange(e.target.value)}
                     onKeyPress={(e) => e.key === 'Enter' && search()}
@@ -402,14 +402,15 @@ const Headers = () => {
                                         <HelpOutlineOutlinedIcon className='text-orange-400' />
                                         <div className="flex flex-col items-start gap-1">
                                             <span className="text-sm font-base text-gray-900">Help Center</span>
-                                            <span className="text-xs text-gray-500">24/7 customer support</span>
+                                            <span className="text-xs text-start text-gray-500">24/7 customer support</span>
                                         </div>
                                     </div>
 
                                 </div>
                             </div>
                             <div className="flex-1 overflow-y-auto">
-                                <h3 className="font-semibold text-lg sticky top-0 h-12 items-center pt-2 pl-3 shadow-sm bg-white text-gray-800">Shop Categories</h3>
+                                <h3 className="font-semibold text-lg sticky top-0 h-12 items-center pt-2 pl-3 shadow-sm bg-white text-gray-800">
+                                    Categories</h3>
                                 <ul>
                                     {categorys.map((c, i) => (
                                         <li key={i}>

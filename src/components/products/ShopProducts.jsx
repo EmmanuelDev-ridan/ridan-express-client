@@ -62,7 +62,7 @@ const FeatureProducts = ({ products }) => {
                     <div key={i} className='bg-white rounded-lg shadow-sm hover:shadow-lg transition-all duration-300 group overflow-hidden flex flex-col'>
                         <Link to={`/product/details/${p.slug}`} className='relative flex-1'>
                             {p.discount && (
-                                <div className='absolute left-1 top-1 bg-orange-500 text-white px-3 py-1 rounded-lg text-xs font-semibold z-0 lg:z-10'>
+                                <div className='absolute left-1 top-1 bg-orange-500 text-white px-3 py-1 rounded-lg text-xs font-semibold z-10'>
                                     {p.discount}% OFF
                                 </div>
                             )}

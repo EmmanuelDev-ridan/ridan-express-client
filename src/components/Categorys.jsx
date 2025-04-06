@@ -100,12 +100,12 @@ const Categorys = () => {
                   role="listitem"
                 >
                   {/* Enhanced category card */}
-                  <div className="relative w-full aspect-square rounded-full bg-white p-3 lg:p-5 transition-all">
+                  <div className="relative w-full aspect-square rounded-xl bg-white p-3 lg:p-5 transition-all">
                     <img
                       src={category.image}
                       alt={category.name}
                       loading="lazy"
-                      className="w-full h-full shadow-sm rounded-full lg:rounded-3xl object-contain hover:scale-110 transition-transform duration-300"
+                      className="w-full h-full shadow-sm rounded-xl lg:rounded-3xl object-contain hover:scale-110 transition-transform duration-300"
                     />
                   </div>
                   <h3 className="mt-2 text-sm md:text-base font-medium text-gray-600 text-center">
@@ -125,7 +125,7 @@ const Categorys = () => {
                   className="snap-start min-w-[105px] md:min-w-[180px] lg:min-w-[200px]
                   flex flex-col items-center p-3 space-y-3 animate-pulse"
                 >
-                  <div className="w-full aspect-square bg-gray-200 rounded-full" />
+                  <div className="w-full aspect-square bg-gray-200 rounded-xl" />
                   <div className="h-4 w-3/4 bg-gray-200 rounded" />
                   <div className="h-4 w-1/2 bg-gray-200 rounded" />
                 </div>

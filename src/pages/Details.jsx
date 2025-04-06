@@ -6,25 +6,21 @@ import { Breadcrumb, HR } from "flowbite-react";
 import { HiHome } from "react-icons/hi";
 import "react-multi-carousel/lib/styles.css";
 import { Swiper, SwiperSlide } from "swiper/react";
+import 'swiper/css/navigation';
 import "swiper/css";
 import { useDispatch, useSelector } from "react-redux";
 import "swiper/css/pagination";
-import { Pagination } from "swiper";
+import { Pagination, Navigation } from 'swiper/modules';
 import Ratings from "../components/Ratings";
-import BottomNav from "../components/BottomNav"
 import Reviews from "../components/Reviews";
 import { get_product } from "../store/reducers/homeReducer";
-import { Button, Modal } from "flowbite-react";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
-import WarningAmberOutlinedIcon from '@mui/icons-material/WarningAmberOutlined';
 import { FormControl, InputLabel, Select, MenuItem, Box, CircularProgress } from '@mui/material';
 import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined';
-import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import XIcon from '@mui/icons-material/X';
 import FacebookIcon from '@mui/icons-material/Facebook';
-import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 import { AiFillHeart, AiOutlineShoppingCart } from 'react-icons/ai'
 import { get_card_products } from '../store/reducers/cardReducer';
@@ -42,7 +38,7 @@ const Details = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
-    
+
     const { card_product_count } = useSelector(state => state.card);
     const { price, } = useSelector((state) => state.card);
     const navigate = useNavigate();
@@ -348,7 +344,7 @@ const Details = () => {
     return (
         <div className="bg-gray-100 overflow-x-hidden <div className={`fixed bottom-0 left-0 right-0 transition-transform duration-300 ${visible ? 'translate-y-0' : 'translate-y-full'}`}>">
             <Headers />
-            <div className=" py-2 mb-0 bg-gray-800 lg:mb-3 mt-[4rem] lg:mt-[7rem] md:mb-0">
+            <div className=" py-2 mb-0 bg-gray-800 lg:mb-3 mt-[4rem] lg:mt-[8rem] md:mb-0">
                 <div className="w-[85%] xl:w-[90%] lg:w-[95%] md:w-full mx-auto">
                     <Breadcrumb aria-label="breadcrumb" className="px-0 md:px-7 lg:px-5 dark:bg-gray-800">
                         <Breadcrumb.Item href="/">
@@ -380,17 +376,52 @@ const Details = () => {
                                 />
                             </div>
 
-                            {/* Mobile Carousel */}
-                            <div className="lg:hidden carousel carousel-center space-x-4 p-4 bg-gray-50 rounded-box">
-                                {(product?.images || []).map((img, index) => (
-                                    <div key={index} className="carousel-item w-[80%] md:w-[42%]">
-                                        <img
-                                            src={img}
-                                            className="rounded-box w-full h-[100%] md:h-[320px] object-cover"
-                                            alt={`Product view ${index + 1}`}
-                                        />
+                            <div className="lg:hidden relative mx-auto max-w-3xl">
+                                <Swiper
+                                    modules={[Navigation, Pagination]}
+                                    navigation={{
+                                        nextEl: '.swiper-button-next',
+                                        prevEl: '.swiper-button-prev',
+                                    }}
+                                    pagination={{ clickable: true }}
+                                    spaceBetween={5}  // Reduced from 20
+                                    slidesPerView={1}
+                                    breakpoints={{
+                                        640: {
+                                            slidesPerView: 1.3,  // More compact view on tablets
+                                            spaceBetween: 5
+                                        },
+                                        768: {
+                                            slidesPerView: 1.5,
+                                            spaceBetween: 15
+                                        }
+                                    }}
+                                    className="h-[300px]"  // Reduced from 400px
+                                >
+                                    {product?.images?.map((img, index) => (
+                                        <SwiperSlide key={index} className="!flex items-center justify-center">
+                                            <div className="h-full w-full p-2">
+                                                <img
+                                                    src={img}
+                                                    className="w-full h-full object-contain hover:scale-105 transition-transform duration-300"
+                                                    alt={`Product ${index}`}
+                                                />
+                                            </div>
+                                        </SwiperSlide>
+                                    ))}
+
+                                    {/* Smaller Navigation Arrows */}
+                                    <div className="swiper-button-prev left-1 !w-8 !h-8 after:!text-[16px]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" color="black" strokeWidth="2" d="M15 19l-7-7 7-7" />
+                                        </svg>
                                     </div>
-                                ))}
+                                    <div className="swiper-button-next right-1 !w-8 !h-8 after:!text-[16px]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" color="black" strokeWidth="2" d="M9 5l7 7-7 7" />
+                                        </svg>
+                                    </div>
+                                </Swiper>
                             </div>
 
                             {/* Desktop Thumbnails */}

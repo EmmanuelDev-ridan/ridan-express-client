@@ -70,7 +70,7 @@ const Register = () => {
     const handleResend = async () => {
         setResendLoader(true);
         try {
-            await axios.post(`${process.env.REACT_APP_API_URL}/api/customer/resend-verification`, {
+            await axios.post(`${import.meta.env.VITE_API_URL}/api/resend-verification`, {
                 email: form.email
             });
             toast.success('Verification email resent!');
